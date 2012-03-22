@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title%} | Home{% endblock %}
+
+{% block titleslider %}
+<div class="grid_12 entry">
+	<div class="entry_styles">
+		<div id="slides">
+			<div class="slides_container">
+				{% for s in ts.slides %}
+					<div class="slide">
+						<img src="{{ s.image.url }}" width="{{ s.image.width }}" height="{{ s.image.height }}" alt="{{ s.title }}">
+						<div class="caption">
+							<div class="caption_padding">
+								<div class="entry_title"><h1>{{ s.title }}</h1></div>
+								{% if s.tags %}
+									<ul class="tags">
+										{% for t in s.tags.all %}
+											{% if t.kind == "client" %}
+												<li class="{{ t.kind }}"><a href="#"><span>{{ t.title }}</span></a></li>
+											{% endif %}{# of "if t.kind == client" #}
+										{% endfor %}
+										{% for t in s.tags.all %}
+											{% if t.kind == "medium" %}
+												<li class="{{ t.kind }}"><a href="/{{ t.kind }}/{{ t.slug }}"><span>{{ t.title }}</span></a></li>
+											{% endif %}{# of "if t.kind == medium" #}
+										{% endfor %}	
+									</ul>
+								{% endif %}
+								<div class="entry_text">
+									<p>{{ s.caption }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+{% block entry %}
+	
+<div class="grid_4 entry">
+	<div class="entry_styles">
+		<div class="entry_title"><h1>{{ p.title }}</h1></div>
+		{% if p.tags %}
+			<ul class="tags">
+				{% for t in p.tags.all %}
+					{% if t.kind == "client" %}
+						<li class="{{ t.kind }}"><a href="#"><span>{{ t.title }}</span></a></li>
+					{% endif %}{# of "if t.kind == client" #}
+				{% endfor %}{# of "for t in p.tags.all" #}
+				{% for t in p.tags.all %}
+					{% if t.kind == "medium" %}
+						<li class="{{ t.kind }}"><a href="/{{ t.kind }}/{{ t.slug }}"><span>{{ t.title }}</span></a></li>
+					{% endif %}{# of "if t.kind == medium" #}
+				{% endfor %}{# of "for t in p.tags.all" #}
+			</ul>
+		{% endif %}
+		{% if p.youtube_embed_code %}
+			<div class="youtube_embed">
+				{% load oembed_tags %}
+				{{ p.youtube_embed_code|oembed:"300x182" }}
+			</div>
+		{% endif %}
+		{% if p.image %}
+		<div class="entry_image">
+			<img src="{{ p.image.url }}" width="{{ p.image.width }}" height="{{ p.image.height }}" alt="{{ p.title }}">
+		</div>
+		{% endif %}
+		{% if p.caption %}
+		<div class="entry_text">
+			<p>{{ p.caption }}</p>
+		</div>
+		{% endif %}
+	</div>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+<div class="container_12">
+{% for f in footer %}
+	<div class="grid_{{f.columns_to_span}} entry">
+		<div class="entry_styles">
+			<div class="entry_text">
+				<div class="entry_title"><h1>{{ f.title }}</h1></div>
+				<div class="entry_caption"><p>{{ f.caption|safe}}</p></div>
+			</div>
+		</div>
+	</div>
+{% endfor %}
+</div>
+<div class="copyright">
+  <div class="container_12">
+	<div class="grid_12">
+		{% for g in general %}
+			<p>&#169; {% now "Y" %} {{g.org_name}}. All Rights Reserved.</p>
+		{% endfor %}
+	</div>
+  </div>
+</div>	
+
+{% endblock %}

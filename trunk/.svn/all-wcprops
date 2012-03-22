@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 22
+/svn/!svn/ver/29/trunk
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/3/trunk/LICENSE.txt
+END
+INSTALL.txt
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/9/trunk/INSTALL.txt
+END
+.gitignore
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/28/trunk/.gitignore
+END
+setup.py
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/29/trunk/setup.py
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/9/trunk/README.txt
+END
+CONTRIBUTORS.txt
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/28/trunk/CONTRIBUTORS.txt
+END

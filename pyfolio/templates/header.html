@@ -1,0 +1,26 @@
+<header class="grid_12">
+    <div class="logo">
+	  {% if general %}
+		{% for g in general %}
+		  {% if g.org_logo %}
+			<a href="#" title="logo"><img src="{{ g.org_logo.url }}" width="{{g.org_logo.width}}" height="{{g.org_logo.height}}" alt="{{ g.org_name }}"></a>
+		  {% else %}
+			<h1>{{ g.org_name }}</h1>
+		  {% endif %}
+		{% endfor %}
+	  {% endif %}
+	</div>
+	<nav>
+	  {% if tag %}
+		<ul>
+		  {% for t in tag %}
+			{% if t.kind == "medium" %}
+				<li><a href="/{{ t.kind }}/{{ t.slug }}"><span>{{ t.title }}</span></a></li>
+		  {% endif %}
+		  {% endfor %}	
+		</ul>
+	  {% else %}
+	  <p> No tags exist. Please create "medium" tags to create the navigation. </p>
+	  {% endif %}
+	</nav>
+</header>

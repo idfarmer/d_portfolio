@@ -1,0 +1,162 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>{% for g in general %}{{ g.org_name }}{% endfor %}{% block title %}{% endblock %}</title>
+  <meta name="description" content="">
+  <meta name="author" content="{{ general.org_name }}">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <!-- CSS: implied media=all -->
+  <!-- CSS concatenated and minified via ant build script-->
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/960.css">
+  <!-- end CSS-->
+
+  <script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.min.js"></script>
+  
+  
+</head>
+
+<body>
+
+  <div id="container" class="container_12">
+	<header class="grid_12">
+	  {% block header %}
+		<div id="logo">
+		  {% if general %}
+			{% for g in general %}
+			  {% if g.org_logo %}
+				<a href="/" title="logo"><img src="{{ g.org_logo.url }}" width="{{g.org_logo.width}}" height="{{g.org_logo.height}}" alt="{{ g.org_name }}"></a>
+			  {% else %}
+				<h1>{{ g.org_name }}</h1>
+			  {% endif %}
+			{% endfor %}
+		  {% endif %}
+		</div>
+		<nav>
+		  {% if tag %}
+			<ul>
+			  {% for t in tag %}
+				{% if t.kind == "medium" %}
+					<li><a href="/{{ t.kind }}/{{ t.slug }}"><span {% if t.title == tag_title %}class="selected"{% endif %}>{{ t.title }}</span></a></li>
+				{% endif %}
+			  {% endfor %}	
+			</ul>
+		  {% else %}
+		  <p> No tags exist. Please create "medium" tags to create the navigation. </p>
+		  {% endif %}
+		</nav>
+	  {% endblock %}
+	</header>
+	<div id="main" role="main">
+	  <div id="title_slider">
+		{% for ts in titleslider%}
+			{% block titleslider%}{% endblock %}
+		{% endfor %}
+	  </div>
+	  <div id="content">
+		{% if entry %}
+		  {% for p in entry %}
+			{% block entry%}{% endblock %}
+		  {% endfor %}
+		{% else %}{# of "if entry" #}
+		<p>It doesn't look like there's anything here./p>
+		{% endif %}{# of "if entry" #}
+	  </div>
+	</div>
+</div>
+<footer>
+	{% block footer %}{% endblock %}
+</footer> 
+
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via ant build script-->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  
+  <!-- Slides.js -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+  <script src="{{ STATIC_URL }}js/mylibs/slides.min.jquery.js"></script>
+  <script>
+	$(function(){
+	  $('#slides').slides({
+		preload: true,
+		  preloadImage: 'img/loading.gif',
+		  play: 4500,
+		  pause: 2500,
+		  hoverPause: true,
+		  pagination: true,
+		  generatePagination: true,
+		  paginationClass: 'pagination',
+		  effect: 'slide',
+		  slideSpeed: 2000,
+		  fadeSpeed:2000,
+		  crossfade: true,
+		  animationStart: function(current){
+			$('.caption').animate({
+			  bottom:0
+			},100);
+			if (window.console && console.log) {
+				// example return of current slide number
+				console.log('animationStart on slide: ', current);
+			};
+		  },
+		  animationComplete: function(current){
+			$('.caption').animate({
+			  bottom:0
+			},200);
+			if (window.console && console.log) {
+				// example return of current slide number
+				console.log('animationComplete on slide: ', current);
+			};
+		  },
+		  slidesLoaded: function() {
+			$('.caption').animate({
+			  bottom:0
+			},200);
+		  }
+	  });
+	});
+  </script>
+  
+  <!-- end scripts-->
+
+	
+  <!-- Change UA-XXXXX-X to be your site's ID -->
+  <script>
+    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+    Modernizr.load({
+      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+    });
+  </script>
+
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+  
+</body>
+</html>
+
