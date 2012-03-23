@@ -12,9 +12,9 @@
 						<img src="{{ s.image.url }}" width="{{ s.image.width }}" height="{{ s.image.height }}" alt="{{ s.title }}">
 						<div class="caption">
 							<div class="caption_padding">
-								<div class="entry_title"><h1>{{ s.title }}</h1></div>
+								<div class="entry_title" style="{{ s.title_style }}"><h1>{{ s.title }}</h1></div>
 								{% if s.tags %}
-									<ul class="tags">
+									<ul class="tags" style="{{ s.tag_style }}">
 										{% for t in s.tags.all %}
 											{% if t.kind == "client" %}
 												<li class="{{ t.kind }}"><a href="#"><span>{{ t.title }}</span></a></li>
@@ -28,7 +28,7 @@
 									</ul>
 								{% endif %}
 								<div class="entry_text">
-									<p>{{ s.caption }}</p>
+									<p>{{ s.caption|safe }}</p>
 								</div>
 							</div>
 						</div>
@@ -79,7 +79,7 @@
 		{% endif %}
 		{% if p.caption %}
 		<div class="entry_text">
-			<p>{{ p.caption }}</p>
+			<p>{{ p.caption|safe}}</p>
 		</div>
 		{% endif %}
 	</div>

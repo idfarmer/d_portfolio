@@ -49,10 +49,12 @@ class Entry(models.Model):
 
 class Slide(models.Model):
 	title = models.CharField(max_length=200)
+	title_style = models.TextField(blank=True)
 	caption = models.TextField()
 	image = models.ImageField(blank=True, upload_to=".")
 	titleslider = models.ForeignKey("TitleSlider")
 	tags = models.ManyToManyField("Tag")
+	tag_style = models.TextField(blank=True)
 	
 	def __unicode__(self):
 		return self.title	
